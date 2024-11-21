@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de Texto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Link para o CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News?</h1>
+        <form id="classificationForm" method="POST" action="/classificar">
+            <label for="texto">Notícias:</label>
+            <textarea id="texto" name="texto" rows="4" placeholder="Digite o texto aqui" required></textarea>
+            
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" id="categoria" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="sociedade_contidiano">Sociedade contidiano</option>
+                <option value="Politico">Politico</option>
+                <option value="tv_celebridades">Tv celebridades</option>
+                <option value="ciencia_tecnologia">ciencia tecnologia</option>
+                <option value="religiao">religiao</option>
+                <option value="Economia">Economia</option>
+            </select>
+            
+            <button type="submit">Classificar</button>
+        </form>
+        
+
+        <div id="result">
+            <h2>Resultado da Classificação:</h2>
+            <p id="classificationResult">Aguardando dados...</p>
+            <p id="comprimentoMedio"></p>
+            <p id="erroOrtografia"></p>
+        </div>
+        
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Link para o JavaScript -->
+</body>
+</html>
