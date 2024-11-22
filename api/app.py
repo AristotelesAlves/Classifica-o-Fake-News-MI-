@@ -50,6 +50,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/teste')
+def index():
+    test = 'olá'
+    return jsonify({test})
+
 @app.route('/classificar', methods=['POST'])
 def classificar():
     data = request.get_json()  # Recebe os dados como JSON
@@ -77,5 +82,5 @@ def classificar():
     })
 
 # Iniciar o servidor
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run()
