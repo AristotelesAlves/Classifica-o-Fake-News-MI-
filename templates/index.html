@@ -8,35 +8,27 @@
 </head>
 <body>
     <div class="container">
-        <h1>Fake News?</h1>
+        <p class="subtitle">
+            Detectando Notícia falsa
+        </p>
         <form id="classificationForm" method="POST" action="/classificar">
             <label for="texto">Notícias:</label>
-            <textarea id="texto" name="texto" rows="4" placeholder="Digite o texto aqui" required></textarea>
-            
-            <label for="categoria">Categoria:</label>
-            <select name="categoria" id="categoria" required>
-                <option value="">Selecione uma categoria</option>
-                <option value="sociedade_contidiano">Sociedade contidiano</option>
-                <option value="Politico">Politico</option>
-                <option value="tv_celebridades">Tv celebridades</option>
-                <option value="ciencia_tecnologia">ciencia tecnologia</option>
-                <option value="religiao">religiao</option>
-                <option value="Economia">Economia</option>
-            </select>
-            
+            <textarea id="texto" name="texto" rows="4" placeholder="Digite o texto aqui" required></textarea>        
             <button type="submit">Classificar</button>
         </form>
         
-
         <div id="result">
             <h2>Resultado da Classificação:</h2>
             <p id="classificationResult">Aguardando dados...</p>
             <p id="comprimentoMedio"></p>
             <p id="erroOrtografia"></p>
         </div>
-        
     </div>
-
+    <footer>
+        <p>
+            Projeto de IA para estudos: os resultados podem não ser totalmente precisos.
+        </p>
+    </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Link para o JavaScript -->
 </body>
 </html>

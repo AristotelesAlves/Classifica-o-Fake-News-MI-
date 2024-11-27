@@ -3,7 +3,6 @@ document.getElementById('classificationForm').addEventListener('submit', async f
 
     // Coletar os dados do formulário
     const texto = document.getElementById('texto').value;
-    const categoria = document.getElementById('categoria').value;
 
     // Enviar os dados para o servidor usando fetch
     const response = await fetch('/classificar', {  // A URL deve ser relativa
@@ -12,8 +11,7 @@ document.getElementById('classificationForm').addEventListener('submit', async f
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            texto: texto,
-            categoria: categoria
+            texto: texto
         })
     });
 

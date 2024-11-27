@@ -18,6 +18,17 @@ body {
     width: 400px;
 }
 
+.subtitle{
+    color: rgb(90, 90, 90);
+    margin-bottom: -10px;
+    font-size: x-large;
+    padding: 10px 10px;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    font-weight: 900;
+}
+
 h1 {
     text-align: center;
     color: #333;
@@ -69,4 +80,21 @@ button:hover {
     font-size: 18px;
     color: #333;
     font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > p {
+    font-size: small;
+    font-style: italic;
+    font-weight: 500;
+    text-align: center;
+    width: 50%;
 }

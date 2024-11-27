@@ -54,7 +54,6 @@ def index():
 def classificar():
     data = request.get_json()  # Recebe os dados como JSON
     texto = data['texto']
-    categoria = data['categoria']
 
 
     # Limpeza do texto
@@ -68,7 +67,7 @@ def classificar():
     texto_vec = tfidf_vectorizer.transform([texto_limpo])
 
     # Previsão do modelo Naive Bayes
-    predicao = nb_model.predict(texto_vec, categoria)
+    predicao = nb_model.predict(texto_vec)
     resultado = 'Fake' if predicao[0] == 1 else 'Real'
 
     # Retornar o resultado em formato JSON
@@ -77,5 +76,5 @@ def classificar():
     })
 
 # Iniciar o servidor
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run()
