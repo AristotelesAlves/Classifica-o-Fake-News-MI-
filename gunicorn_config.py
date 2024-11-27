@@ -1,6 +1,8 @@
 # gunicorn_config.py
 
 # Número de workers - baseado no número de CPUs disponíveis
+
+import os
 import multiprocessing
 
 # Bind para usar a porta especificada pelo ambiente
