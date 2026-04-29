@@ -1,34 +1,50 @@
-document.getElementById('classificationForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Impede o comportamento padrão de envio do formulário
+const form = document.getElementById('classificationForm');
+const loadingEl = document.getElementById('loading');
+const submitBtn = document.getElementById('submitBtn');
+const resultEmpty = document.getElementById('resultEmpty');
+const resultFake = document.getElementById('resultFake');
+const resultReal = document.getElementById('resultReal');
 
-    // Exibir o GIF de carregamento
-    const loadingElement = document.getElementById('loading');
-    loadingElement.style.display = 'flex';
+form.addEventListener('submit', async function (event) {
+  event.preventDefault();
 
-    // Coletar os dados do formulário
-    const texto = document.getElementById('texto').value;
+  const texto = document.getElementById('texto').value.trim();
+  if (!texto) return;
 
-    try {
-        // Enviar os dados para o servidor usando fetch
-        const response = await fetch('/classificar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ texto: texto })
-        });
+  // Show loading
+  loadingEl.classList.add('active');
+  submitBtn.disabled = true;
 
-        if (response.ok) {
-            const result = await response.json(); // Receber a resposta JSON
-            // Exibir o resultado no HTML
-            document.getElementById('classificationResult').textContent = `Classe predita: ${result.prediction}`;
-        } else {
-            document.getElementById('classificationResult').textContent = 'Erro ao classificar o texto.';
-        }
-    } catch (error) {
-        document.getElementById('classificationResult').textContent = 'Erro ao processar a requisição.';
-    } finally {
-        // Ocultar o GIF de carregamento
-        loadingElement.style.display = 'none';
+  // Reset result
+  resultEmpty.style.display = 'none';
+  resultFake.classList.remove('visible');
+  resultReal.classList.remove('visible');
+
+  try {
+    const response = await fetch('/classificar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texto }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      const isFake = result.prediction === 'Fake';
+
+      if (isFake) {
+        resultFake.classList.add('visible');
+      } else {
+        resultReal.classList.add('visible');
+      }
+    } else {
+      resultEmpty.style.display = 'flex';
+      resultEmpty.innerHTML = '<span class="result-empty-icon">⚠️</span>Erro ao classificar o texto.';
     }
+  } catch (error) {
+    resultEmpty.style.display = 'flex';
+    resultEmpty.innerHTML = '<span class="result-empty-icon">⚠️</span>Erro ao processar a requisição.';
+  } finally {
+    loadingEl.classList.remove('active');
+    submitBtn.disabled = false;
+  }
 });
